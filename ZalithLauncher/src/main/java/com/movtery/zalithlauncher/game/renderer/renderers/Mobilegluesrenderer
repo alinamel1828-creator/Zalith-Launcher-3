@@ -42,3 +42,13 @@ object MobileGluesRenderer : RendererInterface {
 
     override fun getRendererLibrary(): String = "libmobileglues.so"
 }
+
+val renderers: List<RendererInterface> = listOf(
+    GL4ESRenderer,
+    VirGLRenderer,
+    FreedrenoRenderer,
+    PanfrostRenderer,
+    KopperZinkRenderer,
+    NGGL4ESRenderer,
+    MobileGluesRenderer // <-- ВОТ ЭТА СТРОЧКА ДОЛЖНА БЫТЬ ТУТ!
+)
