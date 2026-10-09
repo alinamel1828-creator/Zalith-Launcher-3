@@ -52,3 +52,6 @@ val renderers: List<RendererInterface> = listOf(
     NGGL4ESRenderer,
     MobileGluesRenderer // <-- ВОТ ЭТА СТРОЧКА ДОЛЖНА БЫТЬ ТУТ!
 )
+
+override fun getRendererId(): String = "zalith_vulkan_ultra"
+override fun getRendererName(): String = "Zalith Vulkan Ultra (MobileGlues 2.0)"
