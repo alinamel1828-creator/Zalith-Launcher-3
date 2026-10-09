@@ -1,0 +1,44 @@
+/*
+ * Zalith Launcher 3 - Performance & Vulkan Edition
+ */
+
+package com.movtery.zalithlauncher.game.renderer.renderers
+
+import com.movtery.zalithlauncher.game.renderer.RendererInterface
+
+object MobileGluesRenderer : RendererInterface {
+    override fun getRendererId(): String = "mobile_glues_v2"
+
+    override fun getUniqueIdentifier(): String = "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+
+    override fun getRendererName(): String = "MobileGlues (Vulkan Ultra)"
+
+    // Поддержка всех свежих версий и снапшотов (26.x и выше)
+    override fun getMaxMCVersion(): String = "99.99.99"
+
+    override fun getRendererEnv(): Lazy<Map<String, String>> = lazy {
+        mapOf(
+            // Основной Vulkan & MobileGlues профиль
+            "MG_ENABLE_VULKAN" to "1",
+            "MG_VULKAN_VERSION" to "1.3",
+            "MG_OPTIMIZE_SHADERS" to "1",
+            "MG_SHADER_CACHE" to "1",
+            
+            // Разгон буферов кадра и текстур под шейдеры
+            "MG_FORCE_MEDIA_TEK_BOOST" to "1",
+            "MG_ENABLE_THREADED_RENDER" to "1",
+            "MG_ZERO_COPY_TEXTURES" to "1",
+            "MESA_VK_WINSYS" to "wayland",
+            
+            // Снижение просадок FPS и убирание статтеров
+            "vblank_mode" to "0",
+            "GALLIUM_HUD" to "0"
+        )
+    }
+
+    override fun getDlopenLibrary(): Lazy<List<String>> = lazy {
+        listOf("libvulkan.so", "libmobileglues.so")
+    }
+
+    override fun getRendererLibrary(): String = "libmobileglues.so"
+}
