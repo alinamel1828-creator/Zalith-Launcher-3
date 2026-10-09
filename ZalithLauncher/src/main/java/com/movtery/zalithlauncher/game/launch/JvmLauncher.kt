@@ -104,9 +104,20 @@ open class JvmLauncher(
         val argList: MutableList<String> = ArrayList(
             getCacioJavaArgs(screenSize, runtime.javaVersion == 8)
         ).apply {
+            // --- ZALITH LAUNCHER 3 OPTIMIZATION FLAGS ---
+            add("-XX:+UseG1GC")
+            add("-XX:+ParallelRefProcEnabled")
+            add("-XX:MaxGCPauseMillis=20")
+            add("-XX:+UnlockExperimentalVMOptions")
+            add("-XX:+DisableExplicitGC")
+            add("-XX:G1NewSizePercent=20")
+            add("-XX:G1ReservePercent=15")
+            add("-XX:G1HeapWastePercent=5")
+            add("-XX:G1MixedGCCountTarget=4")
+            // ---------------------------------------------
             addAll(args)
         }
-
+                
         LoggerBridge.appendTitle("Launch JVM")
         LoggerBridge.appendInfo("Java arguments: \r\n${argList.joinToString("\r\n")}")
 
