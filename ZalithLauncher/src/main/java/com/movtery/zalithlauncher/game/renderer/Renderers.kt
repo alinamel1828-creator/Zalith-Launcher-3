@@ -53,7 +53,8 @@ object Renderers {
             KopperZinkRenderer,
             VirGLRenderer,
             FreedrenoRenderer,
-            PanfrostRenderer
+            PanfrostRenderer,
+            mobilegluesrenderer
         )
     }
 
