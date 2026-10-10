@@ -13,7 +13,7 @@
  * See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
+ * along with this program.  If not, see <https://gnu.org>.
  */
 
 package com.movtery.zalithlauncher.game.renderer
@@ -21,11 +21,10 @@ package com.movtery.zalithlauncher.game.renderer
 import com.movtery.zalithlauncher.game.renderer.renderers.FreedrenoRenderer
 import com.movtery.zalithlauncher.game.renderer.renderers.GL4ESRenderer
 import com.movtery.zalithlauncher.game.renderer.renderers.KopperZinkRenderer
-import com.movtery.zalithlauncher.game.renderer.renderers.Mobilegluesrenderer
 import com.movtery.zalithlauncher.game.renderer.renderers.NGGL4ESRenderer
 import com.movtery.zalithlauncher.game.renderer.renderers.PanfrostRenderer
 import com.movtery.zalithlauncher.game.renderer.renderers.VirGLRenderer
-// ИМПОРТ: Подключаем наш новый созданный кастомный класс
+// Импортируем наш созданный кастомный класс
 import com.movtery.zalithlauncher.game.renderer.renderers.MaliVulkanRenderer
 import com.movtery.zalithlauncher.utils.logging.Logger
 
@@ -51,7 +50,7 @@ object Renderers {
         }
 
         addRenderers(
-            MaliVulkanRenderer, // ДОБАВЛЕНО: Ставим наш рендерер самым первым в список!
+            MaliVulkanRenderer, // Наш оптимизированный движок идет первым в списке!
             NGGL4ESRenderer,
             GL4ESRenderer,
             KopperZinkRenderer,
@@ -92,14 +91,14 @@ object Renderers {
 
     /**
      * 设置当前的渲染器
-     * @param uniqueIdentifier 渲染器的唯一标识符，用于找到当前想要设置的渲染器
+     * @param uniqueIdentifier 渲染器的唯一标识符，用于找到当前อยาก设置的渲染器
      * @param retryToFirstOnFailure 如果未找到匹配的渲染器，是否跳回渲染器列表的首个渲染器
      */
     fun setCurrentRenderer(uniqueIdentifier: String, retryToFirstOnFailure: Boolean = true) {
         if (!isInitialized) throw IllegalStateException("Uninitialized renderer!")
         currentRenderer = renderers.find { it.getUniqueIdentifier() == uniqueIdentifier } ?: run {
             if (retryToFirstOnFailure) {
-                val renderer = renderers[0]
+                val renderer = renderers[0] // Исправлено: берем первый рендерер из массива при ошибке
                 Logger.warning(TAG, "Incompatible renderer $uniqueIdentifier will be replaced with ${renderer.getUniqueIdentifier()} (${renderer.getRendererName()})")
                 renderer
             } else null
