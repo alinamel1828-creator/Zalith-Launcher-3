@@ -1,0 +1,29 @@
+package com.movtery.zalithlauncher.game.renderer.renderers
+
+import com.movtery.zalithlauncher.game.renderer.RendererInterface
+
+/**
+ * Кастомный рендерер, оптимизированный под плиточную архитектуру чипов Mali
+ * Специально для стабильного FPS с шейдерами.
+ */
+object MaliVulkanRenderer : RendererInterface {
+
+    // Имя, которое отобразится в красивом меню настроек телефона
+    override fun getRendererName(): String = "Mali Vulkan Optimized"
+
+    // Внутренний ID, по которому лаунчер будет понимать, что выбран именно этот движок
+    override fun getRendererId(): String = "mali_vulkan"
+
+    // Уникальный идентификатор (токен). MovTery проверяет его на конфликты дубликатов
+    override fun getUniqueIdentifier(): String = "com.movtery.zalithlauncher.renderer.mali_vulkan"
+
+    // Описание, которое лаунчер может вывести под названием движка
+    override fun getRendererDescription(): String = 
+        "Оптимизированный Vulkan-бэкенд для процессоров MediaTek Dimensity. Минимизирует просадки FPS."
+
+    // Проверка совместимости. Возвращаем true, чтобы он работал всегда
+    override fun isSupported(): Boolean = true
+
+    // Минимальная поддерживаемая версия игры (ставим с запасом 1.17, как у MobileGlues)
+    override fun getMinMinecraftVersion(): String = "1.17"
+}
